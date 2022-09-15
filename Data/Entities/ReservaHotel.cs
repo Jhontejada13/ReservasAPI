@@ -8,19 +8,19 @@ namespace ReservasAPI.Data.Entities
 
         public int IdTurista { get; set; }
 
-        public int IdSucursal { get; set; }
+        public int IdHotel { get; set; }
 
         public Turista Turista { get; set; }
 
         public Hotel Hotel { get; set; }
 
-        [Required]
+        //[Required]
         public string Regimen { get; set; }
 
-        [Required]
+        //[Required]
         public DateTime FechaLlegada { get; set; }
 
-        [Required]
+        //[Required]
         public DateTime FechaSalida { get; set; }
     }
 }

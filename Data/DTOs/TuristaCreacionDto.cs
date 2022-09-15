@@ -24,9 +24,5 @@ namespace ReservasAPI.Data.DTOs
         [Required(ErrorMessage = "El campo {0} es requerido")]
         [StringLength(maximumLength: 20, ErrorMessage = "El campo {0} no puede contener más de 20 caracteres")]
         public string Telefono { get; set; }
-
-        public List<ContratoSucursal> ContratosSucursal { get; set; }
-
-        public List<Hotel> Hoteles { get; set; }
     }
 }

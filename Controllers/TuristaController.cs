@@ -28,24 +28,53 @@ namespace ReservasAPI.Controllers
             return await _context.Turistas.ToListAsync();
         }
 
-        [HttpGet("id")]
-        public async Task<ActionResult<List<Turista>>> ObtenerTuristaPorId(int id)
+        [HttpGet("{id}")]
+        public async Task<ActionResult<TuristaDto>> ObtenerTuristaPorId(int id)
         {
-            var turista = _context.Turistas.FirstOrDefault(x => x.Id == id);
+            var turista = await _context.Turistas.FirstOrDefaultAsync(x => x.Id == id);
+
+            if(turista == null)
+                return NotFound();
+
+            return _mapper.Map<TuristaDto>(turista);
+        }
+
+        [HttpPost]
+        public async Task<ActionResult> Post([FromBody] TuristaCreacionDto turistaCreacionDTO)
+        {
+            var turista = _mapper.Map<Turista>(turistaCreacionDTO);
+            _context.Add(turista);
+            await _context.SaveChangesAsync();
+            return NoContent();
+        }
+
+        [HttpPut("{id}")]
+        public async Task<ActionResult> Put(Turista turista, int id)
+        {
+            if (turista.Id != null)
+                return BadRequest("El genero no existe");
+
+            var existe = await _context.Turistas.AnyAsync(x => x.Id == id);
+
+            if (!existe)
+                return NotFound();
+
+            _context.Update(turista);
+            await _context.SaveChangesAsync();
+            return Ok();
+        }
+
+        [HttpDelete("{id}")]
+        public async Task<ActionResult> Delete(int id)
+        {
+            var turista = await _context.Turistas.FirstOrDefaultAsync(x => x.Id == id);
 
             if (turista == null)
                 return NotFound();
 
-            return _mapper.Map<TuristaDto>(turista);
-
-            return await _context.Turistas.ToListAsync();
-        }
-
-        //public ApplicationDbContext Context { get; }
-
-        public IActionResult Index()
-        {
-            return View();
+            _context.Remove(turista);
+            await _context.SaveChangesAsync();
+            return NoContent(); //204
         }
     }
 }
