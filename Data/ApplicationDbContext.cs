@@ -17,5 +17,11 @@ namespace ReservasAPI.Data
 
         public DbSet<ContratoSucursal> ContratosSucursales { get; set; }
 
+        public DbSet<Hotel> Hoteles { get; set; }
+
+        public DbSet<ReservaHotel> ReservaHoteles { get; set; }
+
+
+
     }
 }
