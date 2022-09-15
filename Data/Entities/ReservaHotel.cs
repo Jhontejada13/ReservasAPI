@@ -11,8 +11,12 @@
 
         public Turista Turista { get; set; }
 
-        public Sucursal Sucursal { get; set; }
+        public Hotel Hotel { get; set; }
 
-        public int MyProperty { get; set; }
+        public string Regimen { get; set; }
+
+        public DateTime FechaLlegada { get; set; }
+
+        public DateTime FechaSalida { get; set; }
     }
 }
