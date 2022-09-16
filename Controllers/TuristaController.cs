@@ -56,11 +56,6 @@ namespace ReservasAPI.Controllers
             if (turista.Id == null)
                 return BadRequest("El turista no existe");
 
-            var existe = await _context.Turistas.AnyAsync(x => x.Id == id);
-
-            if (!existe)
-                return NotFound();
-
             turista.Nombres = turistaActualizacionDto.Nombres;
             turista.Apellidos = turistaActualizacionDto.Apellidos;
             turista.Direccion = turistaActualizacionDto.Direccion;
