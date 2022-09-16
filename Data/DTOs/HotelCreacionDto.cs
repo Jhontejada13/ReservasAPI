@@ -28,7 +28,5 @@ namespace ReservasAPI.Data.DTOs
 
         [Required]
         public int NumeroPlazas { get; set; }
-
-        public List<ReservaHotel> Reservas { get; set; }
     }
 }

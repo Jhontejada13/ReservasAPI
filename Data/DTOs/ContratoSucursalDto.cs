@@ -4,8 +4,6 @@ namespace ReservasAPI.Data.DTOs
 {
     public class ContratoSucursalDto
     {
-        public int Id { get; set; }
-
         public int IdTurista { get; set; }
 
         public int IdSucursal { get; set; }
@@ -13,5 +11,6 @@ namespace ReservasAPI.Data.DTOs
         public Turista Turista { get; set; }
 
         public Sucursal Sucursal { get; set; }
+
     }
 }
