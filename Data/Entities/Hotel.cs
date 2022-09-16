@@ -29,6 +29,6 @@ namespace ReservasAPI.Data.Entities
         [Required]
         public int NumeroPlazas { get; set; }
 
-        public List<ReservaHotel> Reservas { get; set; }
+        //public List<ReservaHotel> Reservas { get; set; }
     }
 }
