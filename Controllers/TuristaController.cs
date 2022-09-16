@@ -49,15 +49,22 @@ namespace ReservasAPI.Controllers
         }
 
         [HttpPut("{id}")]
-        public async Task<ActionResult> Put(Turista turista, int id)
+        public async Task<ActionResult> Put(TuristaActualizacionDto turistaActualizacionDto, int id)
         {
-            if (turista.Id != null)
-                return BadRequest("El genero no existe");
+            var turista = await _context.Turistas.FirstOrDefaultAsync(x => x.Id == id);
+
+            if (turista.Id == null)
+                return BadRequest("El turista no existe");
 
             var existe = await _context.Turistas.AnyAsync(x => x.Id == id);
 
             if (!existe)
                 return NotFound();
+
+            turista.Nombres = turistaActualizacionDto.Nombres;
+            turista.Apellidos = turistaActualizacionDto.Apellidos;
+            turista.Direccion = turistaActualizacionDto.Direccion;
+            turista.Telefono = turistaActualizacionDto.Telefono;
 
             _context.Update(turista);
             await _context.SaveChangesAsync();
