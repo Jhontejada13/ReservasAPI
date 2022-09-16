@@ -25,13 +25,17 @@ namespace ReservasAPI.Controllers
         [HttpGet]
         public async Task<ActionResult<List<Hotel>>> ObtenerHoteles()
         {
-            return await _context.Hoteles.ToListAsync();
+            var hoteles = await _context.Hoteles
+                .ToListAsync();
+
+            return hoteles;
         }
 
         [HttpGet("{id}")]
         public async Task<ActionResult<HotelDto>> ObtenerHotelPorId(int id)
         {
-            var hotel = await _context.Hoteles.FirstOrDefaultAsync(x => x.Id == id);
+            var hotel = await _context.Hoteles
+                .FirstOrDefaultAsync(x => x.Id == id);
 
             if (hotel == null)
                 return NotFound();

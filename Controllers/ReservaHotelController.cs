@@ -25,13 +25,19 @@ namespace ReservasAPI.Controllers
         [HttpGet]
         public async Task<ActionResult<List<ReservaHotel>>> ObtenerReservasHotel()
         {
-            return await _context.ReservaHoteles.ToListAsync();
+            var reservas = await _context.ReservaHoteles.Include(x => x.Turista)
+                .Include(x => x.Hotel)
+                .ToListAsync();
+
+            return reservas;
         }
 
         [HttpGet("{id}")]
         public async Task<ActionResult<ReservaHotelDto>> ObtenerReservaHotelPorId(int id)
         {
-            var reservaHotel = await _context.ReservaHoteles.FirstOrDefaultAsync(x => x.Id == id);
+            var reservaHotel = await _context.ReservaHoteles.Include(x => x.Turista)
+                .Include(x => x.Hotel)
+                .FirstOrDefaultAsync(x => x.Id == id);
 
             if (reservaHotel == null)
                 return NotFound();
@@ -42,7 +48,14 @@ namespace ReservasAPI.Controllers
         [HttpPost]
         public async Task<ActionResult> Post([FromBody] ReservaHotelCreacionDto reservaHotelCreacionDTO)
         {
+            var hotel = await _context.Hoteles.FindAsync(reservaHotelCreacionDTO.IdHotel);
+            var turista = await _context.Turistas.FindAsync(reservaHotelCreacionDTO.IdTurista);
+
             var reservaHotel = _mapper.Map<ReservaHotel>(reservaHotelCreacionDTO);
+
+            reservaHotel.Hotel = hotel;
+            reservaHotel.Turista = turista;
+                
             _context.Add(reservaHotel);
             await _context.SaveChangesAsync();
             return NoContent();
