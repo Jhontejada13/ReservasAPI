@@ -8,8 +8,5 @@ namespace ReservasAPI.Data.DTOs
 
         public int IdSucursal { get; set; }
 
-        public Turista Turista { get; set; }
-
-        public Sucursal Sucursal { get; set; }
     }
 }

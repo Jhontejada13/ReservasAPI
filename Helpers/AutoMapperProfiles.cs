@@ -10,6 +10,18 @@ namespace ReservasAPI.Helpers
         {
             CreateMap<Turista, TuristaDto>().ReverseMap();
             CreateMap<TuristaCreacionDto, Turista>();
+
+            CreateMap<Sucursal, SucursalDto>().ReverseMap();
+            CreateMap<SucursalCreacionDto, Sucursal>();
+
+            CreateMap<ReservaHotel, ReservaHotelDto>().ReverseMap();
+            CreateMap<ReservaHotelCreacionDto, ReservaHotel>();
+
+            CreateMap<Hotel, HotelDto>().ReverseMap();
+            CreateMap<HotelCreacionDto, Hotel>();
+
+            CreateMap<ContratoSucursal, ContratoSucursalDto>().ReverseMap();
+            CreateMap<ContratoSucursalCreacionDto, ContratoSucursal>();
         }
     }
 }

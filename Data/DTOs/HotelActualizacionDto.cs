@@ -1,15 +1,9 @@
-﻿
-using ReservasAPI.Data.Entities;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace ReservasAPI.Data.DTOs
 {
-    public class HotelCreacionDto
+    public class HotelActualizacionDto
     {
-
-        [Required]
-        public Guid CodHotel { get; set; }
-
         [Required(ErrorMessage = "El campo {0} es requerido")]
         [StringLength(maximumLength: 50, ErrorMessage = "El campo {0} no puede contener más de 50 caracteres")]
         public string Nombre { get; set; }
